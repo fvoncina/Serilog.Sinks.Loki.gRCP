@@ -14,7 +14,7 @@ jobs:
       with:
         dotnet-version: 2.2.108
     - name: Build with dotnet
-      run: dotnet pack src/Serilog.Sinks.Loki.gRPC --configuration Release --output nupkgs
+      run: dotnet build src/Serilog.Sinks.Loki.gRPC --configuration Release
     - name: Deploy NuGet Package
       run: dotnet nuget push **/*.nupkg -k $ -s https://api.nuget.org/v3/index.json
       
