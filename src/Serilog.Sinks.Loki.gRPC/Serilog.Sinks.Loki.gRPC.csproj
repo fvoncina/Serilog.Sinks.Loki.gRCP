@@ -7,10 +7,12 @@
         <Description>gRPC sink for Grafana Loki</Description>
         <PackageProjectUrl>https://github.com/fvoncina/Serilog.Sinks.Loki.gRCP</PackageProjectUrl>
         <PackageLicense>https://github.com/fvoncina/Serilog.Sinks.Loki.gRCP/blob/master/LICENSE</PackageLicense>
-<!--        <PackageIcon>https://raw.githubusercontent.com/fvoncina/Serilog.Sinks.Loki.gRCP/blob/master/assets/logo_128_128.png</PackageIcon>-->
+        <PackageIconUrl>https://raw.githubusercontent.com/fvoncina/Serilog.Sinks.Loki.gRCP/master/assets/logo_128_128.png</PackageIconUrl>
         <RepositoryUrl>https://github.com/fvoncina/Serilog.Sinks.Loki.gRCP</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <PackageTags>loki,serilog,sinks</PackageTags>
+        <LangVersion>8</LangVersion>
+        <VersionPrefix>1.0.0</VersionPrefix>
     </PropertyGroup>
 
     <ItemGroup>
