@@ -16,5 +16,5 @@ jobs:
     - name: Build with dotnet
       run: dotnet build src/Serilog.Sinks.Loki.gRPC --configuration Release
     - name: Deploy NuGet Package
-      run: dotnet nuget push ./**/*.nupkg -s https://api.nuget.org/v3/index.json -k "$NUGET_API_KEY"
+      run: dotnet nuget push ./**/*.nupkg -k "$NUGET_API_KEY" -s https://api.nuget.org/v3/index.json
       
