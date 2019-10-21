@@ -15,6 +15,8 @@ jobs:
         dotnet-version: 2.2.108
     - name: Build with dotnet
       run: dotnet build src/Serilog.Sinks.Loki.gRPC --configuration Release -o ./release
+    - name: Add nuget
+      run: nuget sources Add -Name "nuget" -Source "https://api.nuget.org/v3/index.json" -UserName fvoncina -Password "$NUGET_API_KEY"
     - name: Deploy NuGet Package
-      run: dotnet nuget push ./release/Serilog.Sinks.Loki.gRPC.1.0.0.nupkg -k "$NUGET_API_KEY" -s https://api.nuget.org/v3/index.json
+      run: nuget push ./release/Serilog.Sinks.Loki.gRPC.1.0.0.nupkg -Source nuget
       
