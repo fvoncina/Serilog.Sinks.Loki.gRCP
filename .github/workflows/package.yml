@@ -1,12 +1,13 @@
 name: Package
 
-on: [push]
+on:
+  push:
+    paths:
+    - 'src/**'
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-    
     steps:
     - uses: actions/checkout@v1         
     - name: Setup .NET Core

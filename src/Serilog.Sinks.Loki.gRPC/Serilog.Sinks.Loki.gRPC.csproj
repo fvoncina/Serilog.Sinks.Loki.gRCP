@@ -11,7 +11,7 @@
         <RepositoryUrl>https://github.com/fvoncina/Serilog.Sinks.Loki.gRCP</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <PackageTags>loki,serilog,sinks</PackageTags>
-        <VersionPrefix>1.0.1</VersionPrefix>
+        <VersionPrefix>1.0.2</VersionPrefix>
     </PropertyGroup>
 
     <ItemGroup>
