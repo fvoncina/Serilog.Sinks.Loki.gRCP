@@ -24,7 +24,7 @@ namespace SampleAspnetCore
                 .MinimumLevel.Override("Microsoft", LogEventLevel.Error)
                 .Enrich.FromLogContext()
                 .WriteTo.Console()
-                .WriteTo.LokigRPC("172.27.10.3:9095", labelProvider: new GlobalLokiLabelsProvider())
+                .WriteTo.LokigRPC("localhost:9095", labelProvider: new GlobalLokiLabelsProvider())
                 .CreateLogger();
             //Log.Information("Starting web host");
 
