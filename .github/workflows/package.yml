@@ -17,6 +17,6 @@ jobs:
       run: dotnet build src/Serilog.Sinks.Loki.gRPC --configuration Release -o ./release    
     - name: Deploy NuGet Package
       env: # Set the secret as an input
-        super_nuget_key: ${{ secrets.NUGET_API_KEY }}
-      run: dotnet nuget push ./release/Serilog.Sinks.Loki.gRPC.1.0.0.nupkg --no-symbols -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
+        NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+      run: dotnet nuget push **/*.nupkg --no-symbols -k $NUGET_API_KEY -s https://api.nuget.org/v3/index.json
       
