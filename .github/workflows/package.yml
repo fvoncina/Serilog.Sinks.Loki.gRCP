@@ -14,9 +14,9 @@ jobs:
       with:
         dotnet-version: 2.2.108
     - name: Build with dotnet
-      run: dotnet build src/Serilog.Sinks.Loki.gRPC --configuration Release -o ./release    
+      run: dotnet build src/Serilog.Sinks.Loki.gRPC --configuration Release
     - name: Deploy NuGet Package
       env:
         NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
-      run: dotnet nuget push ./release/**/*.nupkg --no-service-endpoint -k $NUGET_API_KEY -s https://api.nuget.org/v3/index.json
+      run: dotnet nuget push **/*.nupkg --no-service-endpoint -k $NUGET_API_KEY -s https://api.nuget.org/v3/index.json
       
