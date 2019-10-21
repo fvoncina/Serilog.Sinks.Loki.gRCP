@@ -15,6 +15,8 @@ jobs:
         dotnet-version: 2.2.108
     - name: Build with dotnet
       run: dotnet build src/Serilog.Sinks.Loki.gRPC --configuration Release -o ./release
+    - name: Setup Nuget.exe
+      uses: warrenbuckley/Setup-Nuget@v1
     - name: Add nuget
       run: nuget sources Add -Name "nuget" -Source "https://api.nuget.org/v3/index.json" -UserName fvoncina -Password "$NUGET_API_KEY"
     - name: Deploy NuGet Package
