@@ -72,6 +72,22 @@ namespace Serilog.Sinks.Loki.gRPC
                     .Select(label => $@"{label.Key}={label.Value.NormalizeLokiLabelValue()}"));
             }
 
+            if (le.Exception != null)
+            {
+                list.Add($"ExceptionType={le.Exception.GetType().Name.NormalizeLokiLabelValue()}");
+                if (le.Exception.Data?.Count != 0)
+                {
+                    foreach (var key in le.Exception.Data.Keys)
+                    {
+                        var value = le.Exception.Data[key];
+                        if (value != null)
+                        {
+                            list.Add($"Exception_Data_{key}={value.ToString().NormalizeLokiLabelValue()}");
+                        }
+                    }
+                }
+            }
+
             list.AddRange(le.Properties.Select(x => $@"{x.Key}={x.Value.ToString().NormalizeLokiLabelValue()}"));
             return $"{{{string.Join(",", list)}}}";
         }
