@@ -3,7 +3,7 @@ name: Package
 on:
   push:
     paths:
-    - 'src/**'
+    - '**'
 
 jobs:
   build:
