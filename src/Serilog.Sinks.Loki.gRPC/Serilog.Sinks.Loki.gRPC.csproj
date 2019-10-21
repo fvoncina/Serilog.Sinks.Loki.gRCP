@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Title>Serilog.Sinks.Loki.gRPC</Title>
+        <Description>gRPC sink for Grafana Loki</Description>
+        <PackageProjectUrl>https://github.com/fvoncina/Serilog.Sinks.Loki.gRCP</PackageProjectUrl>
+        <PackageLicense>https://github.com/fvoncina/Serilog.Sinks.Loki.gRCP/blob/master/LICENSE</PackageLicense>
+<!--        <PackageIcon>https://raw.githubusercontent.com/fvoncina/Serilog.Sinks.Loki.gRCP/blob/master/assets/logo_128_128.png</PackageIcon>-->
+        <RepositoryUrl>https://github.com/fvoncina/Serilog.Sinks.Loki.gRCP</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>loki,serilog,sinks</PackageTags>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Google.Api.Gax.Grpc" Version="2.10.0" />
+      <PackageReference Include="Grpc" Version="2.24.0" />
+      <PackageReference Include="Grpc.Core" Version="2.24.0" />
+      <PackageReference Include="Grpc.Tools" Version="2.24.0" PrivateAssets="All" />
+      <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+      <PackageReference Include="Serilog.Sinks.PeriodicBatching" Version="2.2.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Protobuf Include="Protos\gogo.proto" GrpcServices="Client" />
+        <Protobuf Include="Protos\logproto.proto" GrpcServices="Client" />
+    </ItemGroup>
+
+</Project>
