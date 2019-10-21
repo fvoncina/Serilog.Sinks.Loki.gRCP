@@ -22,5 +22,5 @@ jobs:
     - name: Deploy NuGet Package
       env: # Set the secret as an input
         NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
-      run: dotnet nuget push **/*.nupkg --no-symbols -k $NUGET_API_KEY -s https://api.nuget.org/v3/index.json
+      run: dotnet nuget push **/*.nupkg --no-service-endpoint --no-symbols -k oy2ewnvrzjaqqvzmlzsavg2gozfpggculmea2hav5kr53u -s https://api.nuget.org/v3/index.json
       
