@@ -14,18 +14,21 @@ namespace Serilog.Sinks.Loki.gRPC
         /// <param name="grpcEndpoint">host:port for gRPC</param>
         /// <param name="labelProvider">Custom ILogLabelProvider implementation</param>
         /// <param name="restrictedToMinimumLevel">Minimum level for events passing through the sink</param>
+        /// <param name="stackTraceAsLabel">Indicates if exception stacktrace should be sent as a label</param>
         /// <returns></returns>
         public static LoggerConfiguration LokigRPC(
             this LoggerSinkConfiguration sinkLoggerConfiguration,
             string grpcEndpoint, ILogLabelProvider labelProvider = null,
-            LogEventLevel restrictedToMinimumLevel = LevelAlias.Minimum)
+            LogEventLevel restrictedToMinimumLevel = LevelAlias.Minimum,
+            bool stackTraceAsLabel = false)
         {
             return sinkLoggerConfiguration.Sink(
                 new LokigRpcClient(
                     grpcEndpoint,
                     labelProvider,
                     period: TimeSpan.FromSeconds(2),
-                    queueLimit: int.MaxValue
+                    queueLimit: int.MaxValue,
+                    stackTraceAsLabel: stackTraceAsLabel
                 ), restrictedToMinimumLevel
             );
         }
@@ -40,6 +43,7 @@ namespace Serilog.Sinks.Loki.gRPC
         /// <param name="queueLimit">The maximum number of events stored in the queue in memory, waiting to be posted over the network. Default value is infinitely.</param>
         /// <param name="batchSizeLimit">The maximum number of events to post in a single batch. Default value is 1000.</param>
         /// <param name="restrictedToMinimumLevel">Minimum level for events passing through the sink</param>
+        /// <param name="stackTraceAsLabel">Indicates if exception stacktrace should be sent as a label</param>
         /// <returns></returns>
         public static LoggerConfiguration LokigRPC(
             this LoggerSinkConfiguration sinkLoggerConfiguration,
@@ -48,7 +52,8 @@ namespace Serilog.Sinks.Loki.gRPC
             TimeSpan period,
             int queueLimit,
             int batchSizeLimit,
-            LogEventLevel restrictedToMinimumLevel = LevelAlias.Minimum
+            LogEventLevel restrictedToMinimumLevel = LevelAlias.Minimum,
+            bool stackTraceAsLabel = false
         )
         {
             return sinkLoggerConfiguration.Sink(
@@ -57,7 +62,8 @@ namespace Serilog.Sinks.Loki.gRPC
                     labelProvider,
                     queueLimit,
                     batchSizeLimit,
-                    period
+                    period,
+                    stackTraceAsLabel
                 ), restrictedToMinimumLevel
             );
         }
@@ -69,6 +75,7 @@ namespace Serilog.Sinks.Loki.gRPC
                 return "\"\"";
             }
 
+            value = value.Replace("\"", "\"\"");
             value = !value.StartsWith("\"") ? "\"" + value : value;
             value = !value.EndsWith("\"") ? value + "\"" : value;
             return value;
