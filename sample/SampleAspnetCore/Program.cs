@@ -18,13 +18,14 @@ namespace SampleAspnetCore
         public static void Main(string[] args)
         {
             Serilog.Debugging.SelfLog.Enable(msg => Debug.WriteLine(msg));
-            
+
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
                 .MinimumLevel.Override("Microsoft", LogEventLevel.Error)
                 .Enrich.FromLogContext()
                 .WriteTo.Console()
-                .WriteTo.LokigRPC("localhost:9095", labelProvider: new GlobalLokiLabelsProvider())
+                .WriteTo.LokigRPC("localhost:9095", labelProvider: new GlobalLokiLabelsProvider(),
+                    stackTraceAsLabel: true)
                 .CreateLogger();
             //Log.Information("Starting web host");
 
@@ -33,9 +34,9 @@ namespace SampleAspnetCore
                 .UseSerilog()
                 .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); })
                 .Build();
-            
+
             webhost.Run();
-            
+
             CreateHostBuilder(args).Build().Run();
         }
 

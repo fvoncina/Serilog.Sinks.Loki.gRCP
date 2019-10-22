@@ -22,7 +22,7 @@ namespace Serilog.Sinks.Loki.gRPC
             int? queueLimit = 2,
             int? batchSizeLimit = 1000,
             TimeSpan? period = null,
-            bool stackTraceAsLabel=false
+            bool stackTraceAsLabel = false
         ) : this(grpcEndpoint, globalLabelsProvider, queueLimit ?? int.MaxValue, batchSizeLimit ?? 1000,
             period ?? TimeSpan.FromSeconds(2), stackTraceAsLabel)
         {
@@ -34,7 +34,7 @@ namespace Serilog.Sinks.Loki.gRPC
             int queueLimit,
             int batchSizeLimit,
             TimeSpan period,
-            bool stackTraceAsLabel=false
+            bool stackTraceAsLabel = false
         ) : base(batchSizeLimit, period, queueLimit)
         {
             if (string.IsNullOrEmpty(grpcEndpoint))
@@ -81,7 +81,8 @@ namespace Serilog.Sinks.Loki.gRPC
                 list.Add($"ExceptionType={le.Exception.GetType().Name.NormalizeLokiLabelValue()}");
                 if (_stackTraceAsLabel)
                 {
-                    list.Add($"StackTrace={le.Exception.StackTrace}");
+                    list.Add(
+                        $"StackTrace={System.Web.HttpUtility.HtmlEncode(le.Exception.StackTrace).NormalizeLokiLabelValue()}");
                 }
 
                 if (le.Exception.Data?.Count != 0)

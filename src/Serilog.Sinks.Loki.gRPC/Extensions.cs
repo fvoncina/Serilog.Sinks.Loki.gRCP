@@ -75,7 +75,6 @@ namespace Serilog.Sinks.Loki.gRPC
                 return "\"\"";
             }
 
-            value = value.Replace("\"", "\"\"");
             value = !value.StartsWith("\"") ? "\"" + value : value;
             value = !value.EndsWith("\"") ? value + "\"" : value;
             return value;
