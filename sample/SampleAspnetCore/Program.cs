@@ -27,7 +27,6 @@ namespace SampleAspnetCore
                 .WriteTo.LokigRPC("localhost:9095", labelProvider: new GlobalLokiLabelsProvider(),
                     stackTraceAsLabel: true)
                 .CreateLogger();
-            //Log.Information("Starting web host");
 
             var webhost = Host
                 .CreateDefaultBuilder(args)
