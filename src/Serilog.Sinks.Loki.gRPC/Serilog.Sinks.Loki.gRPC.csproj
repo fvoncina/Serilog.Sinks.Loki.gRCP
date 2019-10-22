@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
+        <TargetFramework>netstandard2.1</TargetFramework>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Title>Serilog.Sinks.Loki.gRPC</Title>
         <Description>gRPC sink for Grafana Loki</Description>
@@ -11,7 +11,7 @@
         <RepositoryUrl>https://github.com/fvoncina/Serilog.Sinks.Loki.gRCP</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <PackageTags>loki,serilog,sinks</PackageTags>
-        <VersionPrefix>1.0.8</VersionPrefix>
+        <VersionPrefix>1.0.9</VersionPrefix>
     </PropertyGroup>
 
     <ItemGroup>

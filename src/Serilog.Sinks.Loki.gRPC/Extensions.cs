@@ -70,14 +70,22 @@ namespace Serilog.Sinks.Loki.gRPC
 
         public static string NormalizeLokiLabelValue(this string value)
         {
-            if (string.IsNullOrEmpty(value))
+            return string.Create(value.Length + 2, value, (Span<char> chars, string r) =>
             {
-                return "\"\"";
-            }
-
-            value = !value.StartsWith("\"") ? "\"" + value : value;
-            value = !value.EndsWith("\"") ? value + "\"" : value;
-            return value;
+                var span = r.AsSpan();
+                var j = 1;
+                chars[0] = (char)34;
+                for (var  i = 0; i < span.Length ; i++)
+                {
+                    chars[j++] = span[i] switch
+                    {
+                        (char)92 => (char)47,
+                        (char)34 => (char)39,
+                        _ => span[i],
+                    };
+                }
+                chars[j++] = (char)34;
+            });
         }
     }
 }
