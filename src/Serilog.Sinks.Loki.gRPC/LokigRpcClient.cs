@@ -14,15 +14,17 @@ namespace Serilog.Sinks.Loki.gRPC
     {
         private readonly Pusher.PusherClient _client;
         private readonly ILogLabelProvider _globalLabelsProvider;
+        private readonly bool _stackTraceAsLabel;
 
         public LokigRpcClient(
             string grpcEndpoint,
             ILogLabelProvider globalLabelsProvider = null,
             int? queueLimit = 2,
             int? batchSizeLimit = 1000,
-            TimeSpan? period = null
+            TimeSpan? period = null,
+            bool stackTraceAsLabel=false
         ) : this(grpcEndpoint, globalLabelsProvider, queueLimit ?? int.MaxValue, batchSizeLimit ?? 1000,
-            period ?? TimeSpan.FromSeconds(2))
+            period ?? TimeSpan.FromSeconds(2), stackTraceAsLabel)
         {
         }
 
@@ -31,7 +33,8 @@ namespace Serilog.Sinks.Loki.gRPC
             ILogLabelProvider globalLabelsProvider,
             int queueLimit,
             int batchSizeLimit,
-            TimeSpan period
+            TimeSpan period,
+            bool stackTraceAsLabel=false
         ) : base(batchSizeLimit, period, queueLimit)
         {
             if (string.IsNullOrEmpty(grpcEndpoint))
@@ -39,6 +42,7 @@ namespace Serilog.Sinks.Loki.gRPC
                 throw new ArgumentNullException(nameof(grpcEndpoint));
             }
 
+            _stackTraceAsLabel = stackTraceAsLabel;
             _globalLabelsProvider = globalLabelsProvider;
             _client = new Pusher.PusherClient(new Channel(grpcEndpoint, ChannelCredentials.Insecure));
         }
@@ -75,6 +79,11 @@ namespace Serilog.Sinks.Loki.gRPC
             if (le.Exception != null)
             {
                 list.Add($"ExceptionType={le.Exception.GetType().Name.NormalizeLokiLabelValue()}");
+                if (_stackTraceAsLabel)
+                {
+                    list.Add($"StackTrace={le.Exception.StackTrace}");
+                }
+
                 if (le.Exception.Data?.Count != 0)
                 {
                     foreach (var key in le.Exception.Data.Keys)
