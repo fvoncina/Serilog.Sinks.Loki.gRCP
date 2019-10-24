@@ -68,6 +68,7 @@ namespace Serilog.Sinks.Loki.gRPC
             );
         }
 
+#if NETSTANDARD2_1
         public static string NormalizeLokiLabelValue(this string value)
         {
             return string.Create(value.Length + 2, value, (Span<char> chars, string r) =>
@@ -95,5 +96,38 @@ namespace Serilog.Sinks.Loki.gRPC
                 chars[j] = (char)34;
             });
         }
+#else
+        public static string NormalizeLokiLabelValue(this string value)
+        {
+            var finalString = new StringBuilder().Append((char)34);
+
+            foreach (var v in value)
+            {
+                switch (Convert.ToInt32(v))
+                {
+                    case 34:
+                    case 44:
+                    case 10:
+                    case 13:
+                        finalString.Append((char)32);
+                        break;
+                    case 92:
+                        finalString.Append((char)47);
+                        break;
+                    case 123:
+                        finalString.Append((char)40);
+                        break;
+                    case 125:
+                        finalString.Append((char)41);
+                        break;
+                    default:
+                        finalString.Append(v);
+                        break;
+                }
+            }
+
+            return finalString.Append((char)34).ToString();
+        }
+#endif
     }
 }
