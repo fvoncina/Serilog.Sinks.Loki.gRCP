@@ -3,6 +3,7 @@ using System.Text;
 using Serilog.Configuration;
 using Serilog.Events;
 using Serilog.Sinks.Loki.gRPC.Labels;
+using System.Text;
 
 namespace Serilog.Sinks.Loki.gRPC
 {
