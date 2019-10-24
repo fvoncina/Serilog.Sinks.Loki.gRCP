@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using Serilog.Configuration;
 using Serilog.Events;
 using Serilog.Sinks.Loki.gRPC.Labels;
@@ -75,7 +76,6 @@ namespace Serilog.Sinks.Loki.gRPC
             {
                 var span = r.AsSpan();
                 var j = 1;
-
                 chars[0] = (char)34;
 
                 foreach (char v in span)
