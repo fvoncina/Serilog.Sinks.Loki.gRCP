@@ -11,24 +11,21 @@
         <RepositoryUrl>https://github.com/fvoncina/Serilog.Sinks.Loki.gRCP</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <PackageTags>loki,serilog,sinks</PackageTags>
-        <VersionPrefix>1.0.12</VersionPrefix>
+        <VersionPrefix>1.0.13</VersionPrefix>
     </PropertyGroup>
 
     <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.1' ">
       <PackageReference Include="Google.Api.Gax.Grpc" Version="2.10.0" />
-      <PackageReference Include="Grpc" Version="2.24.0" />
-      <PackageReference Include="Grpc.Core" Version="2.24.0" />
-      <PackageReference Include="Grpc.Tools" Version="2.24.0" PrivateAssets="All" />
     </ItemGroup>
 
     <ItemGroup Condition=" '$(TargetFramework)' != 'netstandard2.1' ">
-      <PackageReference Include="Google.Api.Gax.Grpc" Version="2.10.0" />
-      <PackageReference Include="Grpc" Version="1.22.1" />
-      <PackageReference Include="Grpc.Core" Version="1.22.1" />
-      <PackageReference Include="Grpc.Tools" Version="1.22.1" PrivateAssets="All" />
+      <PackageReference Include="Google.Api.Gax.Grpc" Version="2.9.0" />
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="Grpc" Version="2.24.0" />
+      <PackageReference Include="Grpc.Core" Version="2.24.0" />
+      <PackageReference Include="Grpc.Tools" Version="2.24.0" PrivateAssets="All" />
       <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
       <PackageReference Include="Serilog.Sinks.PeriodicBatching" Version="2.2.0" />
     </ItemGroup>
