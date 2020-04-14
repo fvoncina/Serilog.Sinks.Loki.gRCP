@@ -14,20 +14,13 @@
         <VersionPrefix>1.0.13</VersionPrefix>
     </PropertyGroup>
 
-    <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.1' ">
-      <PackageReference Include="Google.Api.Gax.Grpc" Version="2.10.0" />
-    </ItemGroup>
-
-    <ItemGroup Condition=" '$(TargetFramework)' != 'netstandard2.1' ">
-      <PackageReference Include="Google.Api.Gax.Grpc" Version="2.9.0" />
-    </ItemGroup>
-
     <ItemGroup>
-      <PackageReference Include="Grpc" Version="2.24.0" />
-      <PackageReference Include="Grpc.Core" Version="2.24.0" />
-      <PackageReference Include="Grpc.Tools" Version="2.24.0" PrivateAssets="All" />
+      <PackageReference Include="Google.Api.Gax.Grpc" Version="3.0.0" />
+      <PackageReference Include="Grpc" Version="2.28.1" />
+      <PackageReference Include="Grpc.Core" Version="2.28.1" />
+      <PackageReference Include="Grpc.Tools" Version="2.28.1" PrivateAssets="All" />
       <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
-      <PackageReference Include="Serilog.Sinks.PeriodicBatching" Version="2.2.0" />
+      <PackageReference Include="Serilog.Sinks.PeriodicBatching" Version="2.3.0" />
     </ItemGroup>
   
     <ItemGroup>
