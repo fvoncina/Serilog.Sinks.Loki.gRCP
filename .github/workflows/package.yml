@@ -1,11 +1,9 @@
 name: Package
-
 on:
   push:
     paths:
     - 'src/**'
     - '.github/**'
-
 jobs:
   build:
     runs-on: ubuntu-latest
