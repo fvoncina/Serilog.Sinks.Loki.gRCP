@@ -30,3 +30,7 @@ services:
       GF_EXPLORE_ENABLED: "true"
     networks:
       - loki
+      
+networks:
+  loki:
+    driver: bridge
