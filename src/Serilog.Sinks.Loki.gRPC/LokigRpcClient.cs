@@ -60,7 +60,10 @@ namespace Serilog.Sinks.Loki.gRPC
                 {
                     Line = le.RenderMessage(),
                     Timestamp = new Google.Protobuf.WellKnownTypes.Timestamp
-                        {Seconds = le.Timestamp.ToUnixTimeSeconds()}
+                    {
+                        Seconds = le.Timestamp.ToUnixTimeSeconds(),
+                        Nanos = Convert.ToInt32((le.Timestamp.ToUnixTimeMilliseconds() - (le.Timestamp.ToUnixTimeSeconds() * 1000)) * 1000000)
+                    }
                 });
             }
 
@@ -69,7 +72,7 @@ namespace Serilog.Sinks.Loki.gRPC
 
         private string GenerateLabels(LogEvent le)
         {
-            var list = new List<string> {$@"level={le.Level.ToString().ToLower().NormalizeLokiLabelValue()}"};
+            var list = new List<string> { $@"level={le.Level.ToString().ToLower().NormalizeLokiLabelValue()}" };
             if (_globalLabelsProvider != null)
             {
                 list.AddRange(_globalLabelsProvider.GetLabels()
